@@ -2,8 +2,6 @@
 
 Quality-aware LLM routing MVP with explicit output checks, tier escalation, cost tracking, a FastAPI service, Streamlit dashboard, and a JSONL benchmark runner.
 
-> **Honest scope:** This is a deployable weekend MVP, not a trained quality predictor or production truthfulness guarantee. Task routing is heuristic; JSON validity, exact reference match, required-term checks and citation-index checks are proxy evaluations. Source citation checks do **not** prove that cited passages entail generated claims. No learned router, Ragas, semantic judge, or real-world cost savings are claimed. Demo mode produces synthetic outputs and synthetic token counts; never report its results as real model benchmarks.
-
 ## Quick start
 
 ```bash
@@ -56,7 +54,3 @@ The default medium and large model IDs are identical placeholders: change them t
 - `benchmark.py`: JSONL batch benchmark runner.
 - `data/sample.jsonl`: tiny smoke-test dataset (not a representative benchmark).
 - `tests/`: unit tests; `.github/workflows/ci.yml`: GitHub Actions.
-
-## Resume wording
-
-Built and deployed a multi-tier LLM routing prototype with task-aware model selection, explicit quality checks, fallback escalation, and per-request token/cost observability. Evaluated end-to-end task success and total inference cost using a reproducible benchmark harness. Add measured outcomes only after running a real held-out evaluation.
