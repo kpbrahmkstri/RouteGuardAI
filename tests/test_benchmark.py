@@ -8,8 +8,11 @@ def test_wilson_conservative():
 
 def test_dataset():
     cases=dataset('data/benchmark.jsonl')
-    assert len(cases)>=16
-    assert sum(c.get('task')=='factual_qa' for c in cases)>=8
+    assert len(cases)>=100
+    assert sum(
+    c.get('task') == 'knowledge_explanation'
+    for c in cases
+) >= 20
 
 def test_cold_start_is_explicit_exploration(monkeypatch,tmp_path):
     monkeypatch.setenv('ROUTEGUARD_DB',str(tmp_path/'empty.db'))

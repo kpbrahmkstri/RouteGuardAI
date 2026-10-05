@@ -14,3 +14,8 @@
 {"id":"ground-2","task":"grounded_qa","prompt":"According to the context, what is the maximum session length? Cite [1].","context":"Sessions are limited to 30 minutes.","required_terms":["30","[1]"]}
 {"id":"sum-1","task":"summarization","prompt":"Summarize in one sentence: The service ran for 24 hours. It processed 100 requests and failed twice.","required_terms":["100","two"]}
 {"id":"code-1","task":"coding","prompt":"Write a Python function called add that returns the sum of two arguments.","required_terms":["def add","return"]}
+{"id":"know-1","task":"knowledge_explanation","prompt":"Explain photosynthesis in simple terms.","required_terms":["light","carbon dioxide","water","oxygen"]}
+{"id":"know-2","task":"knowledge_explanation","prompt":"Explain how gravity works in simple terms.","required_terms":["mass","attract"]}
+{"id":"know-3","task":"knowledge_explanation","prompt":"Explain what DNA does.","required_terms":["genetic","information"]}
+{"id":"know-4","task":"knowledge_explanation","prompt":"Explain the water cycle.","required_terms":["evaporation","condensation","precipitation"]}
+{"id":"know-5","task":"knowledge_explanation","prompt":"Explain how vaccines help the immune system.","required_terms":["immune","response"]}

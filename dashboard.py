@@ -26,7 +26,32 @@ if submit:
             st.subheader('Execution trace')
             for i,at in enumerate(data['attempts'],1):
                 with st.expander(f"Attempt {i}: {at['model']} · {'PASSED' if at.get('passed') else 'NOT VERIFIED / FAILED'}",expanded=True):
-                    st.write('**Why:**',at['reason']);st.write('**Generation tokens:**',at.get('input_tokens',0),'input /',at.get('output_tokens',0),'output');st.write('**Generation cost:**',at.get('generation_cost_usd',0));st.write('**Latency:**',at.get('latency_s',0));st.write('**Deterministic checks:**',at.get('checks',{}));st.write('**Judge:**',at.get('judge',{}));
+                    st.write('**Why:**',at['reason']);st.write('**Generation tokens:**',at.get('input_tokens',0),'input /',at.get('output_tokens',0),'output');
+                    judge_data = at.get('judge', {})
+
+                    st.write(
+                        '**Evaluation cost:**',
+                        judge_data.get('cost_usd', 0)
+                    )
+
+                    attempt_total = (
+                        (at.get('generation_cost_usd') or 0)
+                        + (judge_data.get('cost_usd') or 0)
+                    )
+
+                    st.write(
+                        '**Attempt total cost:**',
+                        attempt_total
+                    )
+
+                    st.write(
+                        '**Evaluation strategy:**',
+                        'LLM-as-a-Judge'
+                        if judge_data.get('status') == 'evaluated'
+                        else 'Deterministic evaluation'
+                    )
+                    
+                    st.write('**Generation cost:**',at.get('generation_cost_usd',0));st.write('**Latency:**',at.get('latency_s',0));st.write('**Deterministic checks:**',at.get('checks',{}));st.write('**Judge:**',at.get('judge',{}));
                     if at.get('error'):st.error(at['error'])
             if not data['pricing_complete']:st.warning('Some model prices are missing. Total cost is incomplete; set prices in models.json.')
             if data['demo_mode']:st.warning('Demo mode: simulated answers and token counts; no real LLM judge or model calls.')
