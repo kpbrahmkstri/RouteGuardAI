@@ -43,4 +43,4 @@ def metrics():
 
 @app.get("/benchmarks/profiles")
 def benchmark_profiles():
-    return {"profiles":profile_rows(),"minimum_samples":int(os.getenv("MIN_BENCHMARK_SAMPLES","5")),"note":"Wilson lower bound is conservative; not a per-prompt quality guarantee."}
+    return {"profiles":profile_rows(),"minimum_samples":int(os.getenv("MIN_BENCHMARK_SAMPLES","30")),"note":"Wilson lower bound is conservative; not a per-prompt quality guarantee."}

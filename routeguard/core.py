@@ -57,7 +57,7 @@ def rank_models(profile,available,quality_threshold,prompt,context):
     profiles=load_profiles()
     estimated_input=max(1,int((len(prompt)+len(context))/3.5)+200)
     estimated_output=350 if profile['task'] in ('coding','reasoning') else 120 if profile['task']=='factual_qa' else 200
-    min_samples=int(os.getenv('MIN_BENCHMARK_SAMPLES','5'))
+    min_samples=int(os.getenv('MIN_BENCHMARK_SAMPLES','30'))
     rows=[]
     for m in available:
         if estimated_input+estimated_output>m.context_window:continue

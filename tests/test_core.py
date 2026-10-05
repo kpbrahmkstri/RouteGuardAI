@@ -1,6 +1,5 @@
 import asyncio
-from routeguard.core import analyze,deterministic,rank_models,models,route,price,Model
-import needs_llm_judge
+from routeguard.core import analyze,deterministic,rank_models,models,route,price,Model,needs_llm_judge
 
 def test_seven_models():
     assert len(models()) == 7

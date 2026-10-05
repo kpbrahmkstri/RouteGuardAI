@@ -44,13 +44,24 @@ if submit:
                         attempt_total
                     )
 
+                    judge_status = judge_data.get('status')
+
+                    if judge_status == 'evaluated':
+                        evaluation_strategy = 'LLM-as-a-Judge'
+                    elif judge_status == 'not_required':
+                        evaluation_strategy = 'Deterministic evaluation'
+                    elif judge_status == 'demo_unverified':
+                        evaluation_strategy = 'Demo / not evaluated'
+                    elif judge_status == 'disabled':
+                        evaluation_strategy = 'Judge disabled'
+                    else:
+                        evaluation_strategy = 'Not evaluated'
+
                     st.write(
                         '**Evaluation strategy:**',
-                        'LLM-as-a-Judge'
-                        if judge_data.get('status') == 'evaluated'
-                        else 'Deterministic evaluation'
+                        evaluation_strategy
                     )
-                    
+                                        
                     st.write('**Generation cost:**',at.get('generation_cost_usd',0));st.write('**Latency:**',at.get('latency_s',0));st.write('**Deterministic checks:**',at.get('checks',{}));st.write('**Judge:**',at.get('judge',{}));
                     if at.get('error'):st.error(at['error'])
             if not data['pricing_complete']:st.warning('Some model prices are missing. Total cost is incomplete; set prices in models.json.')

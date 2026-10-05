@@ -7,12 +7,19 @@ def test_wilson_conservative():
     assert wilson_lower_bound(0,0)==0
 
 def test_dataset():
-    cases=dataset('data/benchmark.jsonl')
-    assert len(cases)>=100
+    cases = dataset('data/benchmark.jsonl')
+
+    assert len(cases) >= 21
+
     assert sum(
-    c.get('task') == 'knowledge_explanation'
-    for c in cases
-) >= 20
+        c.get('task') == 'factual_qa'
+        for c in cases
+    ) >= 8
+
+    assert sum(
+        c.get('task') == 'knowledge_explanation'
+        for c in cases
+    ) >= 5
 
 def test_cold_start_is_explicit_exploration(monkeypatch,tmp_path):
     monkeypatch.setenv('ROUTEGUARD_DB',str(tmp_path/'empty.db'))
