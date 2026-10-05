@@ -17,7 +17,17 @@ class Model:
 
 # These seven IDs are examples, not a guarantee of account access or current availability.
 DEFAULT_MODELS = ["gpt-4.1-nano", "gpt-4.1-mini", "gpt-4.1", "gpt-4o-mini", "gpt-4o", "gpt-5-mini", "gpt-5"]
-TASKS=('factual_qa','extraction','grounded_qa','coding','reasoning','summarization','general')
+TASKS = (
+    'factual_qa',
+    'knowledge_explanation',
+    'extraction',
+    'grounded_qa',
+    'coding',
+    'reasoning',
+    'summarization',
+    'structured_output',
+    'general',
+)
 
 def models():
     """MODEL_CONFIG_PATH JSON can override model list, prices, context, and empirical scores.
