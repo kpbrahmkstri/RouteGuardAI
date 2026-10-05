@@ -91,15 +91,105 @@ def rank_models(profile,available,quality_threshold,prompt,context):
     rest=[r for r in sorted(rows,key=lambda r:(not r['pricing_known'],r['cost_per_success_usd'] if r['cost_per_success_usd'] is not None else (r['estimated_generation_cost_usd'] if r['pricing_known'] else float('inf')),-(r['quality_lower_bound'] or 0))) if r not in primary]
     return primary+rest,rows,bool(eligible),mode
 
-def classify(prompt,context='',expected_json=False):
-    p=prompt.lower()
-    if expected_json or any(w in p for w in ['extract','classify','json','sentiment']):return 'extraction'
-    if context:return 'grounded_qa'
-    factual_starts=('what is ','what are ','who is ','who was ','where is ','where are ','when is ','when was ','which is ','which are ')
-    if p.startswith(factual_starts) and len(prompt.split())<=30:return 'factual_qa'
-    if any(w in p for w in ['python','code','function','debug','sql']):return 'coding'
-    if any(w in p for w in ['prove','reason','analyze','tradeoff','compare']):return 'reasoning'
-    if any(w in p for w in ['summarize','summary','rewrite']):return 'summarization'
+def classify(prompt, context='', expected_json=False):
+    p = prompt.lower().strip()
+
+    # Grounded QA takes precedence when external context is supplied.
+    if context:
+        return 'grounded_qa'
+
+    # Explicit structured-output requests.
+    if expected_json or any(
+        phrase in p
+        for phrase in (
+            'return json',
+            'return valid json',
+            'json object',
+            'json schema',
+            'structured output',
+        )
+    ):
+        return 'structured_output'
+
+    # Extraction/classification tasks.
+    if any(
+        word in p
+        for word in (
+            'extract',
+            'classify',
+            'sentiment',
+            'identify the',
+        )
+    ):
+        return 'extraction'
+
+    # Coding.
+    if any(
+        word in p
+        for word in (
+            'python',
+            'code',
+            'function',
+            'debug',
+            'sql',
+            'javascript',
+            'algorithm',
+        )
+    ):
+        return 'coding'
+
+    # Explicit reasoning/comparison.
+    if any(
+        word in p
+        for word in (
+            'prove',
+            'reason',
+            'analyze',
+            'analyse',
+            'tradeoff',
+            'trade-off',
+            'compare',
+            'why does',
+            'why do',
+        )
+    ):
+        return 'reasoning'
+
+    # Summarization.
+    if any(word in p for word in ('summarize', 'summary', 'rewrite')):
+        return 'summarization'
+
+    # Explanatory/educational knowledge requests.
+    explanation_starts = (
+        'explain ',
+        'describe ',
+        'teach me ',
+        'how does ',
+        'how do ',
+        'how is ',
+        'give an overview of ',
+    )
+
+    if p.startswith(explanation_starts):
+        return 'knowledge_explanation'
+
+    # Short objective factual questions.
+    factual_starts = (
+        'what is ',
+        'what are ',
+        'who is ',
+        'who was ',
+        'where is ',
+        'where are ',
+        'when is ',
+        'when was ',
+        'which is ',
+        'which are ',
+    )
+
+    if p.startswith(factual_starts) and len(prompt.split()) <= 30:
+        return 'factual_qa'
+
     return 'general'
 
 def analyze(prompt,context='',expected_json=False,quality_threshold=.9):
