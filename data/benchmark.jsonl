@@ -1,0 +1,16 @@
+{"id":"fact-1","task":"factual_qa","prompt":"What is the capital of Oman? Return only the city name.","expected_answer":"Muscat"}
+{"id":"fact-2","task":"factual_qa","prompt":"What is the capital of Japan? Return only the city name.","expected_answer":"Tokyo"}
+{"id":"fact-3","task":"factual_qa","prompt":"Who wrote Pride and Prejudice? Return only the author's name.","expected_answer":"Jane Austen"}
+{"id":"fact-4","task":"factual_qa","prompt":"What is the chemical symbol for gold? Return only the symbol.","expected_answer":"Au"}
+{"id":"fact-5","task":"factual_qa","prompt":"What planet is known as the Red Planet? Return only the planet name.","expected_answer":"Mars"}
+{"id":"fact-6","task":"factual_qa","prompt":"What is the largest ocean on Earth? Return only its name.","expected_answer":"Pacific Ocean"}
+{"id":"fact-7","task":"factual_qa","prompt":"Who painted the Mona Lisa? Return only the name.","expected_answer":"Leonardo da Vinci"}
+{"id":"fact-8","task":"factual_qa","prompt":"What is the capital of Canada? Return only the city name.","expected_answer":"Ottawa"}
+{"id":"extract-1","task":"extraction","prompt":"Extract the city from 'I live in Boston'. Return exactly the city name.","expected_answer":"Boston"}
+{"id":"extract-2","task":"extraction","prompt":"Return valid JSON with a single field called status and the value ok.","expected_json":true,"required_terms":["status","ok"]}
+{"id":"reason-1","task":"reasoning","prompt":"What is 17 multiplied by 13? Return only the integer.","expected_answer":"221"}
+{"id":"reason-2","task":"reasoning","prompt":"What is the next number after 2, 4, 8, 16? Return only the integer.","expected_answer":"32"}
+{"id":"ground-1","task":"grounded_qa","prompt":"According to the provided context, how often are credentials rotated? Cite the context as [1].","context":"Employees rotate credentials every 90 days.","required_terms":["90","[1]"]}
+{"id":"ground-2","task":"grounded_qa","prompt":"According to the context, what is the maximum session length? Cite [1].","context":"Sessions are limited to 30 minutes.","required_terms":["30","[1]"]}
+{"id":"sum-1","task":"summarization","prompt":"Summarize in one sentence: The service ran for 24 hours. It processed 100 requests and failed twice.","required_terms":["100","two"]}
+{"id":"code-1","task":"coding","prompt":"Write a Python function called add that returns the sum of two arguments.","required_terms":["def add","return"]}

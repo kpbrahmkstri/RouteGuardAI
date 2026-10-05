@@ -1,0 +1,3 @@
+{"prompt":"Return a JSON object with a status field","expected_json":true}
+{"prompt":"Summarize this policy with a citation","context":"Employees must rotate credentials every 90 days.","required_terms":["credentials"]}
+{"prompt":"What is two plus two?","expected_answer":"4"}

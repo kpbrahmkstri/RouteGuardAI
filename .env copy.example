@@ -1,0 +1,16 @@
+# Set these to enable live OpenAI-compatible model calls. Without them, the app runs in DEMO_MODE.
+DEMO_MODE=true
+OPENAI_API_KEY=
+OPENAI_BASE_URL=https://api.openai.com/v1
+SMALL_MODEL=gpt-4o-mini
+MEDIUM_MODEL=gpt-4o
+LARGE_MODEL=gpt-4o
+# USD per million tokens; verify against your provider's current prices.
+SMALL_INPUT_PER_M=0.15
+SMALL_OUTPUT_PER_M=0.60
+MEDIUM_INPUT_PER_M=2.50
+MEDIUM_OUTPUT_PER_M=10.00
+LARGE_INPUT_PER_M=2.50
+LARGE_OUTPUT_PER_M=10.00
+ROUTEGUARD_DB=routeguard.db
+API_URL=http://localhost:8000
